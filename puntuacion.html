@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Interactivo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #222601;
+            color: #8C796D;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .scores {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Top Scores</h1>
+        <div class="scores" id="score-list">
+            <!-- Los puntajes se cargarán aquí -->
+        </div>
+    </div>
+    <script>
+        // Leer y mostrar puntajes desde localStorage
+        function loadScores() {
+            const scores = JSON.parse(localStorage.getItem("scores")) || [];
+            const scoreList = document.getElementById("score-list");
+
+            if (scores.length === 0) {
+                scoreList.innerHTML = "<p>No hay puntajes aún.</p>";
+                return;
+            }
+
+            scoreList.innerHTML = scores
+                .map((score, index) => `<p>${index + 1}. ${score}</p>`)
+                .join("");
+        }
+
+        // Cargar puntajes al cargar la página
+        loadScores();
+    </script>
+</body>
+</html>
